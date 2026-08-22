@@ -21,6 +21,14 @@ type PasswordManager struct {
 	isInitialized bool                `json:"-"`
 }
 
+func NewPasswordManager(filePath string) *PasswordManager {
+	return &PasswordManager{
+		passwords:     make(map[string]Password),
+		filePath:      filePath,
+		isInitialized: false,
+	}
+}
+
 func NewPassword(name, value, category string) Password {
 
 	return Password{
