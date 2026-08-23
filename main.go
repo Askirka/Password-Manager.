@@ -64,4 +64,15 @@ func (pm *PasswordManager) SavePassword(name, value, category string) error {
 		return errors.New("password manager not initialized")
 	}
 
+	_, exist := pm.passwords[name]
+	if exist {
+		return errors.New("пароль уже существует")
+
+	}
+
+	passCreated := NewPassword(name, value, category)
+	pm.passwords[name] = passCreated
+
+	return nil
+
 }
