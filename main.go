@@ -1,6 +1,9 @@
 package main
 
-import "time"
+import (
+	"errors"
+	"time"
+)
 
 func main() {
 
@@ -38,5 +41,20 @@ func NewPassword(name, value, category string) Password {
 		CreatedAt:    time.Now(),
 		LastModified: time.Now(),
 	}
+
+}
+
+func (pm *PasswordManager) SetMasterPassword(masterPassword string) error {
+	if len(masterPassword) < 8 {
+		return errors.New("пароль слишком короткий ")
+	}
+
+	masterKeyBytes := make([]byte, 32)
+	copy(masterKeyBytes, []byte(masterPassword))
+
+	pm.masterKey = masterKeyBytes
+	pm.isInitialized = true
+
+	return nil
 
 }
