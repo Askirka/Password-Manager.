@@ -58,3 +58,10 @@ func (pm *PasswordManager) SetMasterPassword(masterPassword string) error {
 	return nil
 
 }
+
+func (pm *PasswordManager) SavePassword(name, value, category string) error {
+	if !pm.isInitialized {
+		return errors.New("password manager not initialized")
+	}
+
+}
